@@ -24,14 +24,14 @@ function gameRound(playerSelection, computerSelection){
     (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
     (playerSelection === "PAPER" && computerSelection === "ROCK")
     ) {
-        winner = "Player"
+        winner = "Player wins!"
 
     } else if (
         (playerSelection === "ROCK" && computerSelection === "PAPER") ||
         (playerSelection === "PAPER" && computerSelection === "SCISSORS") ||
         (playerSelection === "SCISSORS" && computerSelection === "PAPER")
     ) {
-        winner = "Computer";
+        winner = "Jimmy wins!";
     }
     return winner;
 }
@@ -39,26 +39,38 @@ function gameRound(playerSelection, computerSelection){
 function game(){
     let playerSelection = prompt("Rock, Paper or Scissors?");
     playerSelection = playerSelection.toUpperCase();
+    console.log('Player: ' + playerSelection + "!");
 
     const computerSelection = getComputerChoice();
+    console.log('Jimmy: ' + computerSelection + "!");
 
     let roundResult = gameRound(playerSelection, computerSelection);
+    console.log(roundResult)
 
     if (roundResult.search("Player") > -1) {
         playerScore++;
-      } else if (roundResult.search("Computer") > -1) {
+      } else if (roundResult.search("Jimmy") > -1) {
         computerScore++;
-      }
+      } 
+    
+      console.log('Player: ' + playerScore + '   Jimmy ' + computerScore);
+      
       if (playerScore >= 5 && computerScore < 5) {
-        message.textContent = 'Game Over. You Win!';
+        alert('Game Over. You Win!') ;
+        return
       } else if (playerScore < 5 && computerScore >= 5) {
-        message.textContent = 'Game Over. You Lose!';
-      }
-
+        alert('Game Over. Jimmy Wins!');
+        return
+      } 
+     
+        game()
       return roundResult;
+
+      
+
 }
 
 
+game()
 
 
-console.log(game());
