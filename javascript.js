@@ -1,3 +1,8 @@
+let playerScore = 0;
+let computerScore = 0;
+let winner = "";
+
+
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     switch (randomNumber) {
@@ -10,25 +15,50 @@ function getComputerChoice() {
     }
 }
 
+
 function gameRound(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
-        return "It's a tie!";
+        winner = "tie!";
     } else if (
     (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
     (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
     (playerSelection === "PAPER" && computerSelection === "ROCK")
     ) {
-        return "Player wins!"
+        winner = "Player"
+
     } else if (
         (playerSelection === "ROCK" && computerSelection === "PAPER") ||
         (playerSelection === "PAPER" && computerSelection === "SCISSORS") ||
         (playerSelection === "SCISSORS" && computerSelection === "PAPER")
     ) {
-        return "Computer wins!"
+        winner = "Computer";
     }
+    return winner;
 }
 
-const playerSelection = "ROCK";
-const computerSelection = getComputerChoice();
+function game(){
+    let playerSelection = prompt("Rock, Paper or Scissors?");
+    playerSelection = playerSelection.toUpperCase();
 
-console.log(gameRound(playerSelection, computerSelection));
+    const computerSelection = getComputerChoice();
+
+    let roundResult = gameRound(playerSelection, computerSelection);
+
+    if (roundResult.search("Player") > -1) {
+        playerScore++;
+      } else if (roundResult.search("Computer") > -1) {
+        computerScore++;
+      }
+      if (playerScore >= 5 && computerScore < 5) {
+        message.textContent = 'Game Over. You Win!';
+      } else if (playerScore < 5 && computerScore >= 5) {
+        message.textContent = 'Game Over. You Lose!';
+      }
+
+      return roundResult;
+}
+
+
+
+
+console.log(game());
