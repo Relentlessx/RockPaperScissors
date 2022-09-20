@@ -37,7 +37,12 @@ function gameRound(playerSelection, computerSelection){
 }
 
 function game(){
-    let playerSelection = prompt("Rock, Paper or Scissors?");
+    let playerSelection = "";
+    const btnRock = document.querySelector('#btnRock');
+    btnRock.addEventListener('click', () => {
+        console.log("Rock");
+    })
+
     playerSelection = playerSelection.toUpperCase();
     console.log('Player: ' + playerSelection + "!");
 
@@ -47,24 +52,7 @@ function game(){
     let roundResult = gameRound(playerSelection, computerSelection);
     console.log(roundResult)
 
-    if (roundResult.search("Player") > -1) {
-        playerScore++;
-      } else if (roundResult.search("Jimmy") > -1) {
-        computerScore++;
-      } 
     
-      console.log('Player: ' + playerScore + '   Jimmy ' + computerScore);
-      
-      if (playerScore >= 5 && computerScore < 5) {
-        alert('Game Over. You Win!') ;
-        return
-      } else if (playerScore < 5 && computerScore >= 5) {
-        alert('Game Over. Jimmy Wins!');
-        return
-      } 
-     
-        game()
-      return roundResult;
 
       
 
