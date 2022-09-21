@@ -31,7 +31,7 @@ function gameRound(playerSelection){
         winner = ("Player wins! " + playerSelection + " beats " + computerSelection
         + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore); 
         if (playerScore == 5){
-            winner = "<br><br>You won the game!";
+            winner = "You won the game!";
             disableButtons();
         }
         
@@ -39,13 +39,13 @@ function gameRound(playerSelection){
     } else if (
         (playerSelection === "ROCK" && computerSelection === "PAPER") ||
         (playerSelection === "PAPER" && computerSelection === "SCISSORS") ||
-        (playerSelection === "SCISSORS" && computerSelection === "PAPER")
+        (playerSelection === "SCISSORS" && computerSelection === "ROCK")
     ) {
         computerScore += 1;
         winner = ('You lose! ' + computerSelection + ' beats ' + playerSelection
         + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore);
         if (computerScore == 5){
-            winner = "<br><br> You lost the game!";
+            winner = "You lost the game! lmao noob.";
             disableButtons();
         }
     }
@@ -55,11 +55,10 @@ function gameRound(playerSelection){
 
 // Buttons event listener
 
-const btn = document.querySelectorAll('button');
+const btn = document.querySelectorAll('#btn');
 btn.forEach(button =>{
     button.addEventListener('click', function(){
         gameRound(button.value);
-        console.log(button.value);
     })
 })
 
