@@ -1,6 +1,5 @@
 let playerScore = 0;
 let computerScore = 0;
-let winner = "";
 
 
 function getComputerChoice() {
@@ -16,49 +15,71 @@ function getComputerChoice() {
 }
 
 
-function gameRound(playerSelection, computerSelection){
+function gameRound(playerSelection){
+    let computerSelection = getComputerChoice();
+    let winner = "";
+
     if (playerSelection === computerSelection){
-        winner = "tie!";
+        winner = ('It\'s a tie. You both chose ' + playerSelection
+        + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore);
     } else if (
     (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
     (playerSelection === "SCISSORS" && computerSelection === "PAPER") ||
     (playerSelection === "PAPER" && computerSelection === "ROCK")
     ) {
-        winner = "Player wins!"
+        playerScore += 1;
+        winner = ("Player wins! " + playerSelection + " beats " + computerSelection
+        + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore); 
+        if (playerScore == 5){
+            winner = "<br><br>You won the game!";
+            disableButtons();
+        }
+        
 
     } else if (
         (playerSelection === "ROCK" && computerSelection === "PAPER") ||
         (playerSelection === "PAPER" && computerSelection === "SCISSORS") ||
         (playerSelection === "SCISSORS" && computerSelection === "PAPER")
     ) {
-        winner = "Jimmy wins!";
+        computerScore += 1;
+        winner = ('You lose! ' + computerSelection + ' beats ' + playerSelection
+        + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore);
+        if (computerScore == 5){
+            winner = "<br><br> You lost the game!";
+            disableButtons();
+        }
     }
-    return winner;
+    document.getElementById('winner').innerHTML = winner;
+    return;
 }
 
-function game(){
-    let playerSelection = "";
-    const btnRock = document.querySelector('#btnRock');
-    btnRock.addEventListener('click', () => {
-        console.log("Rock");
+// Buttons event listener
+
+const btn = document.querySelectorAll('button');
+btn.forEach(button =>{
+    button.addEventListener('click', function(){
+        gameRound(button.value);
+        console.log(button.value);
     })
+})
 
-    playerSelection = playerSelection.toUpperCase();
-    console.log('Player: ' + playerSelection + "!");
 
-    const computerSelection = getComputerChoice();
-    console.log('Jimmy: ' + computerSelection + "!");
 
-    let roundResult = gameRound(playerSelection, computerSelection);
-    console.log(roundResult)
 
     
 
-      
+// Disable buttons (used to end the game)
 
-}
+function disableButtons() {
+    btn.forEach(elem => {
+        elem.disabled = true;
+    })
+}    
 
-
-game()
-
+function createParagWithText(text) {
+    const p = document.createElement('p');
+    p.textContent = text;
+  
+    return p;
+  }
 
