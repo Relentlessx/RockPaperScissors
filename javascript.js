@@ -63,11 +63,6 @@ btn.forEach(button =>{
     })
 })
 
-
-
-
-    
-
 // Disable buttons (used to end the game)
 
 function disableButtons() {
@@ -76,10 +71,4 @@ function disableButtons() {
     })
 }    
 
-function createParagWithText(text) {
-    const p = document.createElement('p');
-    p.textContent = text;
-  
-    return p;
-  }
 
